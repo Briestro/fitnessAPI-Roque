@@ -9,8 +9,8 @@ app.use(express.json());
 const workoutRoutes = require("./routes/workout");
 const userRoutes = require("./routes/user");
 
-app.use("/", workoutRoutes);
-app.use("/", userRoutes);
+app.use("/users", userRoutes);
+app.use("/workouts", workoutRoutes);
 
 // Connect to MongoDB then start server
 mongoose.connect(process.env.MONGODB_STRING)
