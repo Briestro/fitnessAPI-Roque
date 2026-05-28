@@ -13,7 +13,7 @@ app.use("/", workoutRoutes);
 app.use("/", userRoutes);
 
 // Connect to MongoDB then start server
-mongoose.connect(process.env.MONGODB_URI)
+mongoose.connect(process.env.MONGODB_STRING)
   .then(() => {
     console.log("Connected to MongoDB");
     if (require.main === module) {

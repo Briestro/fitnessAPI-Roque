@@ -4,6 +4,7 @@
         "register":"/register",
         "addWorkout": "/addWorkout",
         "getMyWorkouts":"/getMyWorkouts",
+        "getProfile": "/details",
         "updateWorkout":"/updateWorkout",
         "deleteWorkout":"/deleteWorkout",
         "completeWorkoutStatus":"/completeWorkoutStatus"

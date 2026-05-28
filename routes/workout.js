@@ -3,11 +3,12 @@ const router = express.Router();
 const Workout = require("../models/Workout");
 const auth = require("../auth");
 
+
 // POST /addWorkout
 router.post("/addWorkout", auth, async (req, res) => {
   try {
-    const { name, duration, userId } = req.body;
-    const workout = new Workout({ userId, name, duration });
+    const { name, duration } = req.body;
+    const workout = new Workout({ userId: req.user.id, name, duration });
     await workout.save();
     res.status(201).json(workout);
   } catch (err) {
