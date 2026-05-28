@@ -3,11 +3,8 @@ const router = express.Router();
 const Workout = require("../models/Workout");
 const auth = require("../auth");
 
-// All workout routes are protected
-router.use(auth);
-
-// POST /workouts/addWorkout
-router.post("/addWorkout", async (req, res) => {
+// POST /addWorkout
+router.post("/addWorkout", auth, async (req, res) => {
   try {
     const { name, duration, userId } = req.body;
     const workout = new Workout({ userId, name, duration });
@@ -18,8 +15,8 @@ router.post("/addWorkout", async (req, res) => {
   }
 });
 
-// GET /workouts/getMyWorkouts
-router.get("/getMyWorkouts", async (req, res) => {
+// GET /getMyWorkouts
+router.get("/getMyWorkouts", auth, async (req, res) => {
   try {
     const workouts = await Workout.find({ userId: req.user.id });
     res.status(200).json({ workouts });
@@ -28,8 +25,8 @@ router.get("/getMyWorkouts", async (req, res) => {
   }
 });
 
-// PATCH /workouts/updateWorkout/:id
-router.patch("/updateWorkout/:id", async (req, res) => {
+// PATCH /updateWorkout/:id
+router.patch("/updateWorkout/:id", auth, async (req, res) => {
   try {
     const workout = await Workout.findOneAndUpdate(
       { _id: req.params.id, userId: req.user.id },
@@ -43,8 +40,8 @@ router.patch("/updateWorkout/:id", async (req, res) => {
   }
 });
 
-// DELETE /workouts/deleteWorkout/:id
-router.delete("/deleteWorkout/:id", async (req, res) => {
+// DELETE /deleteWorkout/:id
+router.delete("/deleteWorkout/:id", auth, async (req, res) => {
   try {
     const workout = await Workout.findOneAndDelete({
       _id: req.params.id,
@@ -57,8 +54,8 @@ router.delete("/deleteWorkout/:id", async (req, res) => {
   }
 });
 
-// PATCH /workouts/completeWorkoutStatus/:id
-router.patch("/completeWorkoutStatus/:id", async (req, res) => {
+// PATCH /completeWorkoutStatus/:id
+router.patch("/completeWorkoutStatus/:id", auth, async (req, res) => {
   try {
     const workout = await Workout.findOneAndUpdate(
       { _id: req.params.id, userId: req.user.id },
